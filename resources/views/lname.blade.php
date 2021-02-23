@@ -1,1 +1,1 @@
-The name is: <?php echo $name; ?>
+My name is: <?php echo $name; ?>

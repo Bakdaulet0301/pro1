@@ -61,7 +61,12 @@ Route::get('/excompact/{name}/{age}/{date}/{lname}', function ($name,$age,$date,
 
 Route::get('/calc/{num1}/{sign}/{num2}',"CalcController@operation" );
 
-Route::get('/dis/{name}',"StudentController@show" );
+Route::get('/dis/{id}',"StudentController@show" );
+
+Route::get('/coms', function () {
+    return view('comone');
+});
+
 
 
 

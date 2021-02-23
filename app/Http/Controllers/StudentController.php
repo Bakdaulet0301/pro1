@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     //
-    
-    public function name(){
+   public function name(){
     	static $name=array(0=>"Dauren",1=>"Bakdaulet",2=>"Maksat");
     	return $name;
     }	
@@ -29,5 +28,7 @@ class StudentController extends Controller
     	$age=$this->age();
     	return view("lname",["name"=>$name[$id]])."; ".view("dateofbirth",["date"=>$date[$id]])."; ".view("age",["age"=>$age[$id]]);
     }
+
+
 
 }

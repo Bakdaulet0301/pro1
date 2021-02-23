@@ -40,3 +40,29 @@ Route::get('/post1/{id}/{name?}', function ($id,$name=null) {
 Route::get('/global/{id}/{name}', function ($id,$name) {
     return "Your id is: ".$id." ".$name;
 })->where('name','[a-zA-Z]+');
+
+
+Route::get('/contr',"SecondController@index");
+
+Route::resource('/contr2',"SecondController");
+
+Route::get('/firstview', function () {
+  return  view("/firstview",["name"=>"John","age"=>18]);
+});
+
+Route::get('/exwith', function () {
+  return  view("/firstview")->with("name","Maksat")->with("age",25)->with("date","03-08-2002")->with("lname","Nick");
+});
+
+Route::get('/excompact/{name}/{age}/{date}/{lname}', function ($name,$age,$date,$lname) {
+  return  view("/firstview",compact('name','age','date','lname'));
+});
+
+
+Route::get('/calc/{num1}/{sign}/{num2}',"CalcController@operation" );
+
+Route::get('/dis/{name}',"StudentController@show" );
+
+
+
+

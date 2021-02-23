@@ -1,0 +1,1 @@
+Result of operation: <?php echo $res; ?>

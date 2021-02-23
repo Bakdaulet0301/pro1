@@ -70,6 +70,11 @@ Route::get('/coms', function () {
 Route::get('/news',"COMController@ride" );
 
 
+Route::get('/name',"StudentController@name" );
+Route::get('/age/{age}',"StudentController@age" );
+
+Route::get('/date',"StudentController@date" );
+
 
 
 

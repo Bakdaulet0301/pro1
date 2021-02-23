@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 class COMController extends Controller
 {
     //
-     public function Coma()
+     public function ride()
     {
     	return "This com2";
     }
+
+
 }

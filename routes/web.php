@@ -67,7 +67,7 @@ Route::get('/coms', function () {
     return view('comone');
 });
 
-Route::get('/comae',"COMController@Coma" );
+Route::get('/news',"COMController@ride" );
 
 
 

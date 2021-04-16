@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnAdvisorToTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddColumnAdvisorToTable extends Migration
      */
     public function up()
     {
-        Schema::table('student', function (Blueprint $table) {
-            //
-            $table->string("advisor");
+        Schema::create('items', function (Blueprint $table) {
+            
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+
         });
     }
 
@@ -26,9 +29,6 @@ class AddColumnAdvisorToTable extends Migration
      */
     public function down()
     {
-        Schema::table('student', function (Blueprint $table) {
-            //
-       $table->dropColumn("advisor");
-        });
+        Schema::dropIfExists('items');
     }
 }

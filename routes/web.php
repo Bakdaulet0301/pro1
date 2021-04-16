@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Student;
+//use App\Models\Gym;
+use App\Models\Item;
+use App\Models\ItemDetails;
+//use App\Http\Controllers\GymController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,19 +67,12 @@ Route::get('/excompact/{name}/{age}/{date}/{lname}', function ($name,$age,$date,
 
 Route::get('/calc/{num1}/{sign}/{num2}',"CalcController@operation" );
 
-Route::get('/dis/{id}',"StudentController@show" );
 
 Route::get('/coms', function () {
     return view('comone');
 });
 
 Route::get('/news',"COMController@ride" );
-
-
-Route::get('/name',"StudentController@name" );
-Route::get('/age/{age}',"StudentController@age" );
-
-Route::get('/date',"StudentController@date" );
 
 
 
@@ -146,5 +144,35 @@ Route::get('/delete2', function () {
    $student->delete();
    
 });
+Route::get('articles','ArticleController@index');
+
+Route::post('/adinfo',[ArticleController::class,'store'])->name('article.add');
+
+Route::get('example/{lang}', function ($lang) {
+   App::setlocale($lang);
+   return view('home');
+   
+});
+
+Route::get('students','StudentController@index');
+Route::post('/studentadd','StudentController@store');
+
+
+
+
+Route::get('gyms','GymController@index');
+
+Route::post('/clientadd','GymController@store');
+
+
+Route::get('multiuploads', 'UploadController@uploadForm');
+Route::post('multiuploads', 'UploadController@uploadSubmit');
+Route::get('mail/send', [MailController::class, 'send']);
+
+
+Route::get('chart', function () {
+    return view('chart');
+});
+
 
 

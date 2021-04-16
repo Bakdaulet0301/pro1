@@ -1,27 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Student;
+
 use Illuminate\Http\Request;
-use App\Http\Resources\StudentResource;
-class StudentController extends Controller
+use App\Http\Requests;
+use App\Models\Article;
+use App\Http\Resources\Article as ArticleResource;
+
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
- public function indexes()
-    {
-        $students = Student::paginate(100);
-        return StudentResource::collection($students);
-}
     public function index()
     {
-        //
+        $articles=Article::orderBy('id','DESC')->get();
+        return view('res',compact('articles'));
         
-        return view('students');
+        //
     }
 
     /**
@@ -43,26 +41,21 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //
-        $student =new Student();
-        $student->fname=$request->input('fname');
-        $student->lname=$request->input('lname');
-        $student->email=$request->input('email');
-        $student->phone=$request->input('phone');
-        $student->save();
-                
-
+        // $article =new Article;
+        // $article->title=$request->title;
+        // $article->body=$request->body;
+        // $article->save();
+        // return response()->json($article);
+        $article=$request->isMethod('put')?Article::
+        findOrFail($request->article_id):new Article;
+        $article->id=$request->input('article_id');
+        $article->title=$request->input('title');
+        $article->body=$request->input('body');
+        if($article->save()){
+            return new ArticleResource($article);
+        }
     }
 
-         public function stores(Request $request)
-    {
-         $student = new Student();
-        $student->fname = $request->fname;
-        $student->lname = $request->lname;
-        $student->email = $request->email;
-        $student->phone = $request->phone;
-        $student->save();
-        return response()->json($student);
-}
     /**
      * Display the specified resource.
      *
@@ -72,8 +65,8 @@ class StudentController extends Controller
     public function show($id)
     {
         //
-         $student = Student::findOrFail($id);
-        return new StudentResource($student);
+        $article=Article::findOrFail($id);
+        return new ArticleResource($article);
     }
 
     /**
@@ -97,14 +90,6 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         //
-          $student = Student::findOrFail($id);
-        $student->fname = $request->fname;
-        $student->lname = $request->lname;
-        $student->email = $request->email;
-        $student->phone = $request->phone;
-        if($student->save()){
-            return new StudentResource($student);
-        }
     }
 
     /**
@@ -116,9 +101,11 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
-         $student = Student::findOrFail($id);
-        if($student->delete()){
-            return new StudentResource($student);
-        }
+        $article=Article::findOrFail($id);
+        if($article->delete()){
+
+
+        return new ArticleResource($article);
+}
     }
 }
